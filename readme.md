@@ -1,6 +1,6 @@
 ## Ropycat
 
-Sample scripts to copy/paste a file into a Citrix XenApp or Citrix XenDesktop when copy/paste option is not allowed !
+Scripts to copy/paste a file into Citrix XenApp or Citrix XenDesktop when copy/paste option is not allowed !
 
 ![demo](https://user-images.githubusercontent.com/5891788/69732073-452c0480-112b-11ea-9ad5-d3b80aeca2a8.gif)
 
