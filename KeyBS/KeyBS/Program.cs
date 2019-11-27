@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WindowsInput;
 
-namespace ConsoleApplication7
+namespace KeyBS
 {
     class Program
     {
@@ -39,8 +39,9 @@ There is no limitation on the file you want to export.");
             for (var j = 0; j < data.Length; j++)
             {
                 System.Threading.Thread.Sleep(5);
-                InputSimulator.SimulateTextEntry(data[j].ToString());
-                
+                InputSimulator s = new InputSimulator();
+                s.Keyboard.TextEntry(data[j].ToString());
+
             }
             File.AppendAllText("valid.txt", data);
             System.Threading.Thread.Sleep(sleep);
@@ -168,7 +169,7 @@ save it as .html and open it with IE. He will ask you to save the file(decoded i
             }
             else
             {
-                // the file is not a binary
+/*                // the file is not a binary
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 var lines = File.ReadAllLines(file);
                 for (var i = 0; i < lines.Length; i++)
@@ -187,7 +188,7 @@ save it as .html and open it with IE. He will ask you to save the file(decoded i
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
             Console.WriteLine("[+] KeyBS stop : " + elapsedMs / 1000 + "s, " + (new FileInfo("valid.txt").Length / (elapsedMs / 1000)) + "o/s");
-            Console.Write("\n");
+            Console.Write("\n");*/
 
             if (overwrite.ToUpper().Equals("Y") || overwrite.ToLower().Equals("y"))
             {

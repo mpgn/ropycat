@@ -14,7 +14,7 @@ Write-Host "
  |_|\_\___|\__, |____/|_____/ 
             __/ |             
            |___/              
-                                                                                                                    
+By @mpgn_x64                                                                                                                    
 "
 Write-Host "Keyboard Simulator allow you to import files content from your physical PC to a remote PC.
 Use this program if the copy/past is disallowed by the policy system but you need to import data.
@@ -26,13 +26,17 @@ Write-Host ""
 
 # get the file and check the path
 Do {
-    $file = Read-Host 'Select absolute path of the file you want to copy:'
+    $file = Read-Host 'Select absolute path of the file you want to copy'
     if (-Not $file) {
         $file = "THISfileisnotfind"
     }
 } while( -Not (Test-Path $file))
 
-$size = (Get-Item $file).length
+$timetocopy = ((Get-Item $file).length/26)
+$ts =  [timespan]::fromseconds($timetocopy)
+Write-Host ' '
+Write-Host 'Time to copy the file: ' ("{0:hh\:mm\:ss}" -f $ts) 'hours' -foregroundcolor red
+Write-Host ' '
 
 # is binary ?
 $message  = 'If the file is a binary I cannot directly send him through the keyboard.
@@ -88,17 +92,33 @@ function b64toBlob(r,e,n){e=e||"",n=n||512;for(var t=atob(r),a=[],o=0;o<t.length
 }
 
 # get the process
-Get-Process |where {$_.mainWindowTItle} |format-table id,name,mainwindowtitle –AutoSize
-$name = Read-Host 'Select the app MainWindowTitle or press ENTER to reload:'
+Get-Process | where {$_.mainWindowTItle} | format-table id,name,mainwindowtitle -AutoSize
+$name = Read-Host 'Select the app MainWindowTitle or press ENTER to reload'
 while( -Not $name ) {
-    Get-Process |where {$_.mainWindowTItle} |format-table id,name,mainwindowtitle –AutoSize
-    $name = Read-Host 'Select the app MainWindowTitle :'
+    Get-Process |where {$_.mainWindowTItle} | format-table id,name,mainwindowtitle -Autosize
+    $name = Read-Host 'Select the app MainWindowTitle'
 }
-Write-Host " "
-Write-Host "DO NOT TOUCH THE KEYBOARD OR THE MOUSE !!!" -foregroundcolor red
-Write-Host " "
+Write-Host ' '
+Write-Host 'DO NOT TOUCH THE KEYBOARD OR THE MOUSE !!!' -foregroundcolor red
+Write-Host ' '
+function Show-Process($Process, [Switch]$Maximize)
+{
+  $sig = '
+    [DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
+    [DllImport("user32.dll")] public static extern int SetForegroundWindow(IntPtr hwnd);
+  '
+  
+  if ($Maximize) { $Mode = 3 } else { $Mode = 4 }
+  $type = Add-Type -MemberDefinition $sig -Name WindowAPI -PassThru
+  $hwnd = $process.MainWindowHandle
+  $null = $type::ShowWindowAsync($hwnd, $Mode)
+  $null = $type::SetForegroundWindow($hwnd) 
+}
+Show-Process -Process (Get-Process -Id $name) 
 $wshell = New-Object -ComObject wscript.shell;
 $app = $wshell.AppActivate($name)
+
+sleep(1)
 
 $cleanContent = $content -replace '([+^%~(){}])', '{$1}'
 Add-Type -AssemblyName System.Windows.Forms

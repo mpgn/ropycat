@@ -1,0 +1,10 @@
+C:\Users\bonclay\source\repos\KeyBS\KeyBS\obj\Debug\KeyBS.csprojAssemblyReference.cache
+C:\Users\bonclay\source\repos\KeyBS\KeyBS\obj\Debug\KeyBS.csproj.CoreCompileInputs.cache
+C:\Users\bonclay\source\repos\KeyBS\KeyBS\bin\Debug\KeyBS.exe.config
+C:\Users\bonclay\source\repos\KeyBS\KeyBS\bin\Debug\KeyBS.exe
+C:\Users\bonclay\source\repos\KeyBS\KeyBS\bin\Debug\KeyBS.pdb
+C:\Users\bonclay\source\repos\KeyBS\KeyBS\bin\Debug\WindowsInput.dll
+C:\Users\bonclay\source\repos\KeyBS\KeyBS\bin\Debug\WindowsInput.xml
+C:\Users\bonclay\source\repos\KeyBS\KeyBS\obj\Debug\KeyBS.csproj.CopyComplete
+C:\Users\bonclay\source\repos\KeyBS\KeyBS\obj\Debug\KeyBS.exe
+C:\Users\bonclay\source\repos\KeyBS\KeyBS\obj\Debug\KeyBS.pdb
